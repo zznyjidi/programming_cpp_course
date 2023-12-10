@@ -117,6 +117,6 @@ class CommandLine{
 };
 
 int main(){
-    CommandLine cmd("Welcome! ", "# ", 5, ' ');
+    CommandLine cmd("Welcome! ", "# ", 6, ' ');
     cmd.getInput();
 }
