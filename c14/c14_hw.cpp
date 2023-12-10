@@ -3,7 +3,7 @@ using namespace std;
 
 int GCD3(int numA, int numB, int numC) {
     int gcd = 1;
-    for (int i = 1; i <= min(numA, numB, numC); i++) {
+    for (int i = 1; i <= min(min(numA, numB), numC); i++) {
         if(numA % i == 0 && numB % i == 0 && numC % i == 0) gcd = i;
     }
     return gcd;
@@ -63,7 +63,7 @@ class Line{
 
     //Funtions - 2Lines
     bool isParallel(Line l1) {
-        return slope() == l1.slope();
+        return (slope() == l1.slope());
     }
     bool isConcident(Line l1) {
         return (a == l1.a && b == l1.b && c == l1.c);
@@ -89,6 +89,34 @@ class Line{
     }
 };
 
+class CommandLine{
+    string inputStart, help, inputs[32];
+    char cmdSeperator;
+    int maxInput;
+    public:
+    CommandLine(string startWith, string input,int initMaxInput, char seperateBy) {
+        cout << startWith << endl;
+        inputStart = input;
+        maxInput = initMaxInput;
+        cmdSeperator = seperateBy;
+        for (int i = 0; i < maxInput; i++) inputs[i] = "";
+    }
+    void setHelp(string helpDoc) {
+        help = helpDoc;
+    }
+    void getInput() {
+        cout << inputStart;
+        string input;
+        getline(cin, input);
+        int index = 0;
+        for(int i = 0; i < input.length() && index < maxInput; i++) {
+            if(input[i] != cmdSeperator) inputs[index] += input[i];
+            else index++;
+        }
+    }
+};
+
 int main(){
-    
+    CommandLine cmd("Welcome! ", "# ", 5, ' ');
+    cmd.getInput();
 }
