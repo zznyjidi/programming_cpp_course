@@ -65,6 +65,9 @@ class Line{
     bool isParallel(Line l1) {
         return slope() == l1.slope();
     }
+    bool isConcident(Line l1) {
+        return (a == l1.a && b == l1.b && c == l1.c);
+    }
     Point intersect(Line l1) {
         Line tempL0(a, b, c);
         Line tempL1 = l1;
