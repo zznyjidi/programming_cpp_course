@@ -34,7 +34,7 @@ class Line{
     }
     //Mx + B Format Line
     Line(int M, int B) {
-        Line var3L((1 - M * 3), 3, (B *3));
+        Line var3L((0 - M * 3), 3, (B *3));
         a = var3L.a;
         b = var3L.b;
         c = var3L.c;
@@ -53,6 +53,12 @@ class Line{
     }
     int yInt() {
         return c/a;
+    }
+
+    //Functions - Slope
+    int slope() {
+        int rise = 0 - yInt(), run = xInt();
+        return rise/run;
     }
 };
 
