@@ -60,6 +60,30 @@ class Line{
         int rise = 0 - yInt(), run = xInt();
         return rise/run;
     }
+
+    //Funtions - 2Lines
+    bool isParallel(Line l1) {
+        return slope() == l1.slope();
+    }
+    Point intersect(Line l1) {
+        Line tempL0(a, b, c);
+        Line tempL1 = l1;
+        //opposite coefficients for Ax
+        tempL0.a = tempL0.a * l1.a;
+        tempL0.b = tempL0.b * l1.a;
+        tempL0.c = tempL0.c * l1.a;
+        tempL1.a = tempL1.a * (0 - a);
+        tempL1.b = tempL1.b * (0 - a);
+        tempL1.c = tempL1.c * (0 - a);
+        //Add up
+        Line sum(tempL0.a + tempL1.a, tempL0.b + tempL1.b, tempL0.c + tempL1.c);
+        //Slove y from sum(Ax = 0)
+        int intY = sum.c / sum.b;
+        //Slove x from Line0(y = intY)
+        int intX = (c - b * intY) / a;
+        //return intersect point
+        return Point(intX, intY);
+    }
 };
 
 int main(){
