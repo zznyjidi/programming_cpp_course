@@ -20,7 +20,7 @@ class Point{
 
 class Line{
     public:
-    //Store in Ax + By + C = 0 Format
+    //Store in Ax + By = C Format
     int a, b, c;
     //Two Point Line
     Line(Point p1, Point p2) {
@@ -39,12 +39,20 @@ class Line{
         b = var3L.b;
         c = var3L.c;
     }
-    //Ax + By + C = 0 Format Line
+    //Ax + By = C Format Line
     Line(int A, int B, int C) {
         int gcd = GCD3(A, B, C);
         a = A/gcd;
         b = B/gcd;
         c = C/gcd;
+    }
+
+    //Functions - X&Y Intercept
+    int xInt() {
+        return c/b;
+    }
+    int yInt() {
+        return c/a;
     }
 };
 
