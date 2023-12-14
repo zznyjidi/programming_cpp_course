@@ -90,7 +90,7 @@ class Line{
 };
 
 class CommandLine{
-    string inputStart, help;
+    string inputStart;
     char cmdSeperator;
     int maxInput;
     public:
@@ -104,9 +104,6 @@ class CommandLine{
     }
     void initInputArr() {
         for (int i = 0; i < maxInput; i++) inputs[i] = "";
-    }
-    void setHelp(string helpDoc) {
-        help = helpDoc;
     }
     void getInput() {
         initInputArr();
