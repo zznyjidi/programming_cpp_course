@@ -148,6 +148,61 @@ class PointList{
     }
 };
 
+class LineList{
+    int index;
+    const int ArrLength = 32;
+    string names[32];
+    Line lines[32];
+    public:
+    LineList() {
+        initArr;
+    }
+    void initArr() {
+        for (int i = 0; i < ArrLength; i++) {
+            names[i] = "";
+            lines[i] = Line(0, 0, 0);
+        }
+    }
+    int getIndex(string name) {
+        int index = -1;
+        for (int i = 0; i < index; i++) {
+            if (names[i] == name) {
+                index = i;
+                break;
+            }
+        }
+        return index;
+    }
+    bool add(string name, Line l) {
+        if (index < ArrLength && getIndex(name) == -1) {
+            names[index] = name;
+            lines[index] = l;
+            index++;
+            return true;
+        } else return false; //List is Full or Name Already Exist
+    }
+    bool del(int delIndex) {
+        if (delIndex > -1 && delIndex < index) {
+            names[delIndex] = names[index - 1];
+            lines[delIndex] = lines[index - 1];
+            index--;
+            names[index] = "";
+            lines[index] = Line(0, 0, 0);
+            return true;
+        } else return false; //Index out of Range
+    }
+    Line get(int pIndex) {
+        if (pIndex > -1 && pIndex < index) return lines[pIndex];
+        else return Line(0, 0, 0);
+    }
+    bool del(string name) {
+        return del(getIndex(name)); //Name Does not Exist
+    }
+    Line get(string name) {
+        return get(getIndex(name));
+    }
+};
+
 class CommandLine{
     string inputStart;
     char cmdSeperator;
