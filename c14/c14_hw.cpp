@@ -98,7 +98,7 @@ class Line{
 };
 
 class PointList{
-    int index;
+    int index = 0;
     const int ArrLength = 32;
     string names[32];
     Point points[32];
@@ -153,7 +153,7 @@ class PointList{
 };
 
 class LineList{
-    int index;
+    int index = 0;
     const int ArrLength = 32;
     string names[32];
     Line lines[32];
@@ -242,6 +242,12 @@ void UnknownCommand() {
 void ObjectNotFound() {
     cout << "Object Not Found. " << endl;
 }
+void cmdSuccess() {
+    cout << "Successed. " << endl;
+}
+void addError() {
+    cout << "Unable to Add to Array, Array is Full or Object Already Exist. " << endl;
+}
 
 int main(){
     PointList pList(Point(0, 0));
@@ -258,6 +264,13 @@ int main(){
                     ObjectNotFound();
                 } else {
                     cout << pList.get(cmd.inputs[2]).describe() << endl;
+                }
+            } else if (cmd.inputs[1] == "add") {
+                Point buffer(stoi(cmd.inputs[3]), stoi(cmd.inputs[4]));
+                if(pList.add(cmd.inputs[2], buffer)) {
+                    cmdSuccess();
+                } else {
+                    addError();
                 }
             }
         } else {
