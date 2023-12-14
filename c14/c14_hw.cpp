@@ -19,6 +19,10 @@ class Point{
         x = xInit;
         y = yInit;
     }
+    string describe() {
+        string dis = "x: " + to_string(x) + ", y: " + to_string(y);
+        return dis;
+    }
 };
 
 class Line{
@@ -99,13 +103,13 @@ class PointList{
     string names[32];
     Point points[32];
     public:
-    PointList() {
-        initArr;
+    PointList(Point defaultPoint) {
+        initArr(defaultPoint);
     }
-    void initArr() {
+    void initArr(Point defaultPoint) {
         for (int i = 0; i < ArrLength; i++) {
             names[i] = "";
-            points[i] = Point(0, 0);
+            points[i] = defaultPoint;
         }
     }
     int getIndex(string name) {
@@ -154,13 +158,13 @@ class LineList{
     string names[32];
     Line lines[32];
     public:
-    LineList() {
-        initArr;
+    LineList(Line defaultLine) {
+        initArr(defaultLine);
     }
-    void initArr() {
+    void initArr(Line defaultLine) {
         for (int i = 0; i < ArrLength; i++) {
             names[i] = "";
-            lines[i] = Line(0, 0, 0);
+            lines[i] = defaultLine;
         }
     }
     int getIndex(string name) {
@@ -232,15 +236,32 @@ class CommandLine{
     }
 };
 
+void UnknownCommand() {
+    cout << "Unknown command, use command \"help\" to get help. " << endl;
+}
+void ObjectNotFound() {
+    cout << "Object Not Found. " << endl;
+}
+
 int main(){
+    PointList pList(Point(0, 0));
+    LineList lList(Line(0, 0, 0));
     for(CommandLine cmd("Welcome! ", "# ", 6, ' '); cmd.inputs[0] != "exit"; cmd.getInput()) {
         string command = cmd.inputs[0];
         if(command == "") {
             continue;
         } else if(command == "help") {
             cout << helpDoc << endl;
+        } else if(command == "point") {
+            if (cmd.inputs[1] == "read") {
+                if (pList.getIndex(cmd.inputs[2]) == -1) {
+                    ObjectNotFound();
+                } else {
+                    cout << pList.get(cmd.inputs[2]).describe() << endl;
+                }
+            }
         } else {
-            cout << "Unknown command, use command \"help\" to get help. " << endl;
+            UnknownCommand();
         }
     }
 }
