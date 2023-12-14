@@ -128,13 +128,13 @@ class PointList{
     }
     bool del(int delIndex) {
         if (delIndex < index) {
-            for (int i = delIndex; i < index; i++) {
-                names[index] = names[index + 1];
-                points[index] = points[index + 1];
-            }
+            names[delIndex] = names[index - 1];
+            points[delIndex] = points[index - 1];
             index--;
+            names[index] = "";
+            points[index] = Point(0, 0);
             return true;
-        } else return false;
+        } else return false; //Index out of Range
     }
 };
 
