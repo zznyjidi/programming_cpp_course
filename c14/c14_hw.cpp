@@ -140,6 +140,12 @@ class PointList{
         if (pIndex > -1 && pIndex < index) return points[pIndex];
         else return Point(0, 0);
     }
+    bool del(string name) {
+        return del(getIndex(name)); //Name Does not Exist
+    }
+    Point get(string name) {
+        return get(getIndex(name));
+    }
 };
 
 class CommandLine{
