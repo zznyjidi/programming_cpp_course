@@ -14,6 +14,7 @@ string helpDoc = "testDoc";
 class Point{
     public:
     int x, y;
+    Point() {} //Allow Empty Point
     Point(int xInit, int yInit) {
         x = xInit;
         y = yInit;
@@ -24,6 +25,7 @@ class Line{
     public:
     //Store in Ax + By = C Format
     int a, b, c;
+    Line() {} //Allow Empty Line
     //Two Point Line
     Line(Point p1, Point p2) {
         int rise = p2.y - p1.y, run = p2.x - p1.x;
@@ -88,6 +90,31 @@ class Line{
         int intX = (c - b * intY) / a;
         //return intersect point
         return Point(intX, intY);
+    }
+};
+
+class PointList{
+    int index;
+    const int ArrLength = 32;
+    string names[32];
+    Point points[32];
+    public:
+    PointList() {
+        initArr;
+    }
+    void initArr() {
+        for (int i = 0; i < ArrLength; i++) {
+            names[i] = "";
+            points[i] = Point(0, 0);
+        }
+    }
+    bool add(string name, Point p) {
+        if (index < ArrLength) {
+            names[index] = name;
+            points[index] = p;
+            index++;
+            return true;
+        } else return false; //List is Full
     }
 };
 
