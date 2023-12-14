@@ -116,6 +116,16 @@ class PointList{
             return true;
         } else return false; //List is Full
     }
+    bool del(int delIndex) {
+        if (delIndex < index) {
+            for (int i = delIndex; i < index; i++) {
+                names[index] = names[index + 1];
+                points[index] = points[index + 1];
+            }
+            index--;
+            return true;
+        } else return false;
+    }
 };
 
 class CommandLine{
