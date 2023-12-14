@@ -99,12 +99,16 @@ class CommandLine{
         inputStart = input;
         maxInput = initMaxInput;
         cmdSeperator = seperateBy;
+        initInputArr();
+    }
+    void initInputArr() {
         for (int i = 0; i < maxInput; i++) inputs[i] = "";
     }
     void setHelp(string helpDoc) {
         help = helpDoc;
     }
     void getInput() {
+        initInputArr();
         cout << inputStart;
         string input;
         getline(cin, input);
