@@ -32,3 +32,5 @@
 *.out
 *.app
 
+# Compiled Files
+bin/
