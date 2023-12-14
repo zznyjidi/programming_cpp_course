@@ -9,6 +9,8 @@ int GCD3(int numA, int numB, int numC) {
     return gcd;
 }
 
+string helpDoc = "testDoc";
+
 class Point{
     public:
     int x, y;
@@ -120,6 +122,13 @@ class CommandLine{
 
 int main(){
     for(CommandLine cmd("Welcome! ", "# ", 6, ' '); cmd.inputs[0] != "exit"; cmd.getInput()) {
-
+        string command = cmd.inputs[0];
+        if(command == "") {
+            continue;
+        } else if(command == "help") {
+            cout << helpDoc << endl;
+        } else {
+            cout << "Unknown command, use command \"help\" to get help. " << endl;
+        }
     }
 }
