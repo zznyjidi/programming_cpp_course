@@ -90,10 +90,11 @@ class Line{
 };
 
 class CommandLine{
-    string inputStart, help, inputs[32];
+    string inputStart, help;
     char cmdSeperator;
     int maxInput;
     public:
+    string inputs[32];
     CommandLine(string startWith, string input,int initMaxInput, char seperateBy) {
         cout << startWith << endl;
         inputStart = input;
@@ -121,6 +122,7 @@ class CommandLine{
 };
 
 int main(){
-    CommandLine cmd("Welcome! ", "# ", 6, ' ');
-    cmd.getInput();
+    for(CommandLine cmd("Welcome! ", "# ", 6, ' '); cmd.inputs[0] != "exit"; cmd.getInput()) {
+
+    }
 }
