@@ -108,13 +108,23 @@ class PointList{
             points[i] = Point(0, 0);
         }
     }
+    int getIndex(string name) {
+        int index = -1;
+        for (int i = 0; i < index; i++) {
+            if (names[i] == name) {
+                index = i;
+                break;
+            }
+        }
+        return index;
+    }
     bool add(string name, Point p) {
-        if (index < ArrLength) {
+        if (index < ArrLength && getIndex(name) == -1) {
             names[index] = name;
             points[index] = p;
             index++;
             return true;
-        } else return false; //List is Full
+        } else return false; //List is Full or Name Already Exist
     }
     bool del(int delIndex) {
         if (delIndex < index) {
