@@ -127,7 +127,7 @@ class PointList{
         } else return false; //List is Full or Name Already Exist
     }
     bool del(int delIndex) {
-        if (delIndex < index) {
+        if (delIndex > -1 && delIndex < index) {
             names[delIndex] = names[index - 1];
             points[delIndex] = points[index - 1];
             index--;
@@ -135,6 +135,10 @@ class PointList{
             points[index] = Point(0, 0);
             return true;
         } else return false; //Index out of Range
+    }
+    Point get(int pIndex) {
+        if (pIndex > -1 && pIndex < index) return points[pIndex];
+        else return Point(0, 0);
     }
 };
 
