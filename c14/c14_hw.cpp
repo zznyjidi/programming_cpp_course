@@ -248,6 +248,9 @@ void cmdSuccess() {
 void addError() {
     cout << "Unable to Add to Array, Array is Full or Object Already Exist. " << endl;
 }
+void syntaxError() {
+    cout << "Command Syntax Error, use command \"help\" to get help. " << endl;
+}
 
 int main(){
     PointList pList(Point(0, 0));
@@ -269,6 +272,8 @@ int main(){
             } else if (cmd.inputs[1] == "del") {
                 if(pList.del(cmd.inputs[2])) cmdSuccess();
                 else ObjectNotFound();
+            } else {
+                syntaxError();
             }
         } else {
             UnknownCommand();
