@@ -113,14 +113,14 @@ class PointList{
         }
     }
     int getIndex(string name) {
-        int index = -1;
+        int pIndex = -1;
         for (int i = 0; i < index; i++) {
             if (names[i] == name) {
-                index = i;
+                pIndex = i;
                 break;
             }
         }
-        return index;
+        return pIndex;
     }
     bool add(string name, Point p) {
         if (index < ArrLength && getIndex(name) == -1) {
@@ -168,14 +168,14 @@ class LineList{
         }
     }
     int getIndex(string name) {
-        int index = -1;
+        int lIndex = -1;
         for (int i = 0; i < index; i++) {
             if (names[i] == name) {
-                index = i;
+                lIndex = i;
                 break;
             }
         }
-        return index;
+        return lIndex;
     }
     bool add(string name, Line l) {
         if (index < ArrLength && getIndex(name) == -1) {
