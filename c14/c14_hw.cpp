@@ -272,11 +272,7 @@ int main(){
             } else if (cmd.inputs[1] == "del") {
                 if(pList.del(cmd.inputs[2])) cmdSuccess();
                 else ObjectNotFound();
-            } else {
-                syntaxError();
-            }
-        } else {
-            UnknownCommand();
-        }
+            } else syntaxError();
+        } else UnknownCommand();
     }
 }
