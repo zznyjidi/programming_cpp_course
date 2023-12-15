@@ -260,18 +260,15 @@ int main(){
             cout << helpDoc << endl;
         } else if(command == "point") {
             if (cmd.inputs[1] == "read") {
-                if (pList.getIndex(cmd.inputs[2]) == -1) {
-                    ObjectNotFound();
-                } else {
-                    cout << pList.get(cmd.inputs[2]).describe() << endl;
-                }
+                if (pList.getIndex(cmd.inputs[2]) == -1) ObjectNotFound();
+                else cout << pList.get(cmd.inputs[2]).describe() << endl;
             } else if (cmd.inputs[1] == "add") {
                 Point buffer(stoi(cmd.inputs[3]), stoi(cmd.inputs[4]));
-                if(pList.add(cmd.inputs[2], buffer)) {
-                    cmdSuccess();
-                } else {
-                    addError();
-                }
+                if(pList.add(cmd.inputs[2], buffer)) cmdSuccess();
+                else addError();
+            } else if (cmd.inputs[1] == "del") {
+                if(pList.del(cmd.inputs[2])) cmdSuccess();
+                else ObjectNotFound();
             }
         } else {
             UnknownCommand();
