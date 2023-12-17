@@ -78,7 +78,7 @@ class Line{
 
     //Funtions - 2Lines
     bool isParallel(Line l1) {
-        return (slope() == l1.slope());
+        return (a == l1.a && b == l1.b);
     }
     bool isConcident(Line l1) {
         return (a == l1.a && b == l1.b && c == l1.c);
