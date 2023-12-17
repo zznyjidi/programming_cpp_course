@@ -2,6 +2,9 @@
 using namespace std;
 
 int GCD3(int numA, int numB, int numC) {
+    if (numA < 0) numA -= numA * 2;
+    if (numB < 0) numB -= numB * 2;
+    if (numC < 0) numC -= numC * 2;
     int gcd = 1;
     for (int i = 1; i <= min(min(numA, numB), numC); i++) {
         if(numA % i == 0 && numB % i == 0 && numC % i == 0) gcd = i;
@@ -367,6 +370,17 @@ int main(){
                 if(lList.del(cmd.inputs[2])) cmdSuccess();
                 else ObjectNotFound(cmd.inputs[2]);
             } else syntaxError(command);
+        } else if(command == "calc") {
+            if (cmd.inputs[1] == "para") {
+                if (lList.getIndex(cmd.inputs[2]) != -1 && lList.getIndex(cmd.inputs[3]) != -1) {
+                    if (lList.get(cmd.inputs[2]).isParallel(lList.get(cmd.inputs[3]))) cout << "Parallel: Ture";
+                    else cout << "Parallel: False";
+                    cout << endl;
+                } else {
+                    if (lList.getIndex(cmd.inputs[2]) == -1) ObjectNotFound(cmd.inputs[2]);
+                    if (lList.getIndex(cmd.inputs[3]) == -1) ObjectNotFound(cmd.inputs[3]);
+                }
+            }
         } else UnknownCommand(command);
     }
 }
