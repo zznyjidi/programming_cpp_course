@@ -374,7 +374,13 @@ int main(){
                 string lineMod = cmd.inputs[3];
                 Line buffer;
                 if (lineMod == "2p") {
-                    buffer = Line(pList.get(cmd.inputs[4]), pList.get(cmd.inputs[5]));
+                    if (pList.getIndex(cmd.inputs[4]) != -1 && pList.getIndex(cmd.inputs[5]) != -1) {
+                        buffer = Line(pList.get(cmd.inputs[4]), pList.get(cmd.inputs[5]));
+                    } else {
+                        if (pList.getIndex(cmd.inputs[4]) == -1) ObjectNotFound(cmd.inputs[4]);
+                        if (pList.getIndex(cmd.inputs[5]) == -1) ObjectNotFound(cmd.inputs[5]);
+                        continue;
+                    }
                 } else if (lineMod == "2v" && SAble2I(cmd.inputs[4]) && SAble2I(cmd.inputs[5])) {
                     buffer = Line(stoi(cmd.inputs[4]), stoi(cmd.inputs[5]));
                 } else if (lineMod == "3v" && SAble2I(cmd.inputs[4]) && SAble2I(cmd.inputs[5]) && SAble2I(cmd.inputs[6])) {
