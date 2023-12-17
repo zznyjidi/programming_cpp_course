@@ -63,11 +63,15 @@ class Line{
         return des;
     }
     //Functions - X&Y Intercept
-    int xInt() {
-        return c/a;
+    double xInt() {
+        double dA = a;
+        double dC = c;
+        return dC/dA;
     }
-    int yInt() {
-        return c/b;
+    double yInt() {
+        double dB = b;
+        double dC = c;
+        return dC/dB;
     }
 
     //Functions - Slope
@@ -380,6 +384,19 @@ int main(){
                     if (lList.getIndex(cmd.inputs[2]) == -1) ObjectNotFound(cmd.inputs[2]);
                     if (lList.getIndex(cmd.inputs[3]) == -1) ObjectNotFound(cmd.inputs[3]);
                 }
+            } else if (cmd.inputs[1] == "coin") {
+                if (lList.getIndex(cmd.inputs[2]) != -1 && lList.getIndex(cmd.inputs[3]) != -1) {
+                    if (lList.get(cmd.inputs[2]).isConcident(lList.get(cmd.inputs[3]))) cout << "Concident: Ture";
+                    else cout << "Concident: False";
+                    cout << endl;
+                } else {
+                    if (lList.getIndex(cmd.inputs[2]) == -1) ObjectNotFound(cmd.inputs[2]);
+                    if (lList.getIndex(cmd.inputs[3]) == -1) ObjectNotFound(cmd.inputs[3]);
+                }
+            } else if (cmd.inputs[1] == "xint") {
+                if (lList.getIndex(cmd.inputs[2]) != -1) cout << "X-Intercept: " << lList.get(cmd.inputs[2]).xInt() << endl;
+            } else if (cmd.inputs[1] == "yint") {
+                if (lList.getIndex(cmd.inputs[2]) != -1) cout << "Y-Intercept: " << lList.get(cmd.inputs[2]).yInt() << endl;
             }
         } else UnknownCommand(command);
     }
