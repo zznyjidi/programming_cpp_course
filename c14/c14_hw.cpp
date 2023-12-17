@@ -308,6 +308,8 @@ void printDoc(string command) {
         cout << "X/Y Intercept: \t\tcalc {xint/yint} {line_name}" << endl;
         cout << "Slope: \t\t\tclac slop {line_name}" << endl;
         cout << "POIntersect: \t\tcalc intc {line_name} {line_name}" << endl;
+    } else {
+        UnknownCommand();
     }
 }
 
