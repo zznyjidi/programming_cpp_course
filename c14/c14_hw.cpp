@@ -64,10 +64,10 @@ class Line{
     }
     //Functions - X&Y Intercept
     int xInt() {
-        return c/b;
+        return c/a;
     }
     int yInt() {
-        return c/a;
+        return c/b;
     }
 
     //Functions - Slope
