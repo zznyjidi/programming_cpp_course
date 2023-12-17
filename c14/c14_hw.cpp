@@ -20,8 +20,8 @@ class Point{
         y = yInit;
     }
     string describe() {
-        string dis = "x: " + to_string(x) + ", y: " + to_string(y);
-        return dis;
+        string des = "x: " + to_string(x) + ", y: " + to_string(y);
+        return des;
     }
 };
 
@@ -55,6 +55,12 @@ class Line{
         c = C/gcd;
     }
 
+
+    //Line to String
+    string describe() {
+        string des = "in Ax + By = C Format: " + to_string(a) + "x + " + to_string(b) + "y = " + to_string(c);
+        return des;
+    }
     //Functions - X&Y Intercept
     int xInt() {
         return c/b;
@@ -271,6 +277,18 @@ int main(){
                 else addError();
             } else if (cmd.inputs[1] == "del") {
                 if(pList.del(cmd.inputs[2])) cmdSuccess();
+                else ObjectNotFound();
+            } else syntaxError();
+        } else if(command == "line") {
+            if (cmd.inputs[1] == "read") {
+                if (lList.getIndex(cmd.inputs[2]) == -1) ObjectNotFound();
+                else cout << lList.get(cmd.inputs[2]).describe() << endl;
+//            } else if (cmd.inputs[1] == "add") {
+//                Point buffer(stoi(cmd.inputs[3]), stoi(cmd.inputs[4]));
+//                if(pList.add(cmd.inputs[2], buffer)) cmdSuccess();
+//                else addError();
+            } else if (cmd.inputs[1] == "del") {
+                if(lList.del(cmd.inputs[2])) cmdSuccess();
                 else ObjectNotFound();
             } else syntaxError();
         } else UnknownCommand();
