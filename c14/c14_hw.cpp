@@ -281,6 +281,8 @@ int main(){
         string command = cmd.inputs[0];
         if(command == "") {
             continue;
+        } else if(command == "debug") {
+            continue; //Breakpoint
         } else if(command == "help") {
             cout << helpDoc << endl;
         } else if(command == "point") {
