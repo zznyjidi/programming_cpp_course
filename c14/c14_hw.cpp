@@ -236,8 +236,13 @@ class CommandLine{
         getline(cin, input);
         int index = 0;
         for(int i = 0; i < input.length() && index < maxInput; i++) {
-            if(input[i] != cmdSeperator) inputs[index] += input[i];
-            else index++;
+            if(input[i] == cmdSeperator) {
+                if((i - 1) >= 0) {
+                    if(input[i - 1] != cmdSeperator) index++;
+                    else continue;
+                } else continue;
+            }
+            else inputs[index] += input[i];
         }
     }
 };
