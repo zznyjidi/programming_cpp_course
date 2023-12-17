@@ -430,7 +430,8 @@ int main(){
                 }
             } else if (cmd.inputs[1] == "intc") {
                 if (lList.getIndex(cmd.inputs[2]) != -1 && lList.getIndex(cmd.inputs[3]) != -1) {
-                    cout << lList.get(cmd.inputs[2]).intersect(lList.get(cmd.inputs[3])).describe() << endl;
+                    if (lList.get(cmd.inputs[2]).isParallel(lList.get(cmd.inputs[3]))) cout << "No Intersect Point" << endl;
+                    else cout << lList.get(cmd.inputs[2]).intersect(lList.get(cmd.inputs[3])).describe() << endl;
                 } else {
                     if (lList.getIndex(cmd.inputs[2]) == -1) ObjectNotFound(cmd.inputs[2]);
                     if (lList.getIndex(cmd.inputs[3]) == -1) ObjectNotFound(cmd.inputs[3]);
