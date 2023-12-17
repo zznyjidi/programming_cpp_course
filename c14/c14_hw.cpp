@@ -295,10 +295,19 @@ void printDoc(string command) {
         cout << "Command \"line\" is used to add, read or delete Lines. " << endl;
         cout << "Syntax: " << endl;
         cout << "Add new Line: \t\tline add {line_name} {define_mode} {args}" << endl;
-        cout << "\tDefine Modes: 2p(Use 2 Points), 2v(in Mx + B Format), 3v(in Ax + By = C Format)" << endl;
-        cout << "\tArgs: Name of 2 Points(2p Mode), M and B(2v Mode), or A, B and C(3v Mode)" << endl;
+        cout << "\tDefine Modes: \t2p(Use 2 Points), 2v(in Mx + B Format), 3v(in Ax + By = C Format)" << endl;
+        cout << "\tArgs: \t\tName of 2 Points(2p Mode), M and B(2v Mode), or A, B and C(3v Mode)" << endl;
         cout << "Read a Line: \t\tline read {line_name}" << endl;
         cout << "Delete a Line: \t\tline del {line_name}" << endl;
+    } else if(command == "calc") {
+        cout << "Command \"calc\" is used to Calculate if 2 lines are Parallel or Coincident, " << endl;
+        cout << "or get the X, Y intercept, Slope, or Point of Intersect of Line(s)" << endl;
+        cout << "Syntax: " << endl;
+        cout << "Parallel: \t\tcalc para {line_name} {line_name}" << endl;
+        cout << "Coincident: \t\tcalc coin {line_name} {line_name}" << endl;
+        cout << "X/Y Intercept: \t\tcalc {xint/yint} {line_name}" << endl;
+        cout << "Slope: \t\t\tclac slop {line_name}" << endl;
+        cout << "POIntersect: \t\tcalc intc {line_name} {line_name}" << endl;
     }
 }
 
