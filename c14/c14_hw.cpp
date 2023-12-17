@@ -245,10 +245,14 @@ class CommandLine{
 bool SAble2I(string s) {
     string allInt = "0123456789";
     bool able = true;
-    for (int i = 0; i < s.length(); i++) {
-        if (allInt.find(s[i]) == -1) {
-            able = false;
-            break;
+    if (s.length() == 0) {
+        able = false;
+    } else {
+        for (int i = 0; i < s.length(); i++) {
+            if (allInt.find(s[i]) == -1) {
+                able = false;
+                break;
+            }
         }
     }
     return able;
@@ -306,9 +310,9 @@ int main(){
                 Line buffer;
                 if (lineMod == "2p") {
                     buffer = Line(pList.get(cmd.inputs[4]), pList.get(cmd.inputs[5]));
-                } else if (lineMod == "2v") {
+                } else if (lineMod == "2v" && SAble2I(cmd.inputs[4]) && SAble2I(cmd.inputs[5])) {
                     buffer = Line(stoi(cmd.inputs[4]), stoi(cmd.inputs[5]));
-                } else if (lineMod == "3v") {
+                } else if (lineMod == "3v" && SAble2I(cmd.inputs[4]) && SAble2I(cmd.inputs[5]) && SAble2I(cmd.inputs[6])) {
                     buffer = Line(stoi(cmd.inputs[4]), stoi(cmd.inputs[5]), stoi(cmd.inputs[6]));
                 } else {
                     syntaxError();
