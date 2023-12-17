@@ -34,16 +34,25 @@ class Line{
     //Two Point Line
     Line(Point p1, Point p2) {
         int rise = p2.y - p1.y, run = p2.x - p1.x;
-        int slope = rise/run;
-        int yint = p1.y - p1.x * slope;
-        Line var2L(slope, yint);
+        Line var2L;
+        if (run == 0) {
+            var2L = Line(1, 0, p1.x); //Vertical Line
+        } else if (rise == 0) {
+            var2L = Line(0, 1, p1.y); //Horiziontal Line
+        } else {
+            int slope = rise/run;
+            int yint = p1.y - p1.x * slope;
+            var2L = Line(slope, yint);
+        }
         a = var2L.a;
         b = var2L.b;
         c = var2L.c;
     }
     //Mx + B Format Line
     Line(int M, int B) {
-        Line var3L((0 - M * 3), 3, (B *3));
+        Line var3L;
+        if (M == 1 && B == 0) var3L = Line(1, -1, 0);
+        else var3L = Line((0 - M * 3), 3, (B *3));
         a = var3L.a;
         b = var3L.b;
         c = var3L.c;
@@ -69,6 +78,9 @@ class Line{
         return dC/dA;
     }
     double yInt() {
+        if (b == 0) {
+            return 0; //Vertical Line
+        }
         double dB = b;
         double dC = c;
         return dC/dB;
@@ -76,7 +88,10 @@ class Line{
 
     //Functions - Slope
     double slope() {
-        double rise = 0 - yInt(), run = xInt();
+        double rise = 0 - a, run = b;
+        if (b == 0) {
+            return 0; //Vertical Line
+        }
         return rise/run;
     }
 
@@ -394,11 +409,25 @@ int main(){
                     if (lList.getIndex(cmd.inputs[3]) == -1) ObjectNotFound(cmd.inputs[3]);
                 }
             } else if (cmd.inputs[1] == "xint") {
-                if (lList.getIndex(cmd.inputs[2]) != -1) cout << "X-Intercept: " << lList.get(cmd.inputs[2]).xInt() << endl;
+                if (lList.getIndex(cmd.inputs[2]) != -1) {
+                    cout << "X-Intercept: ";
+                    cout << lList.get(cmd.inputs[2]).xInt();
+                    cout << endl;
+                }
             } else if (cmd.inputs[1] == "yint") {
-                if (lList.getIndex(cmd.inputs[2]) != -1) cout << "Y-Intercept: " << lList.get(cmd.inputs[2]).yInt() << endl;
+                if (lList.getIndex(cmd.inputs[2]) != -1) {
+                    cout << "Y-Intercept: ";
+                    if (lList.get(cmd.inputs[2]).b == 0) cout << "Undefined";
+                    else cout << lList.get(cmd.inputs[2]).yInt();
+                    cout << endl;
+                }
             } else if (cmd.inputs[1] == "slop") {
-                if (lList.getIndex(cmd.inputs[2]) != -1) cout << "Slope: " << lList.get(cmd.inputs[2]).slope() << endl;
+                if (lList.getIndex(cmd.inputs[2]) != -1) {
+                    cout << "Slope: ";
+                    if (lList.get(cmd.inputs[2]).b == 0) cout << "Undefined";
+                    else cout << lList.get(cmd.inputs[2]).slope();
+                    cout << endl;
+                }
             } else if (cmd.inputs[1] == "intc") {
                 if (lList.getIndex(cmd.inputs[2]) != -1 && lList.getIndex(cmd.inputs[3]) != -1) {
                     cout << lList.get(cmd.inputs[2]).intersect(lList.get(cmd.inputs[3])).describe() << endl;
