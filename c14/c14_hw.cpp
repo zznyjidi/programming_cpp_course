@@ -9,8 +9,6 @@ int GCD3(int numA, int numB, int numC) {
     return gcd;
 }
 
-string helpDoc = "testDoc";
-
 class Point{
     public:
     int x, y;
@@ -275,8 +273,33 @@ void cmdSuccess() {
 void addError() {
     cout << "Unable to Add to Array, Array is Full or Object Already Exist. " << endl;
 }
-void syntaxError() {
-    cout << "Command Syntax Error, use command \"help\" to get help. " << endl;
+void syntaxError(string command) {
+    cout << "Command Syntax Error, use command \"help " << command << "\" to get help. " << endl;
+}
+
+void printDoc(string command) {
+    if (command == "") {
+        cout << "Use \"help {command}\" to get command specific help" << endl;
+        cout << "Command List(Case-Sensitive): " << endl;
+        cout << "\thelp, point, line, calc, exit" << endl;
+    } else if(command == "help") {
+        cout << "No command specific help for \"help\". " << endl;
+        cout << "Use \"help {command}\" to get command specific help" << endl;
+    } else if(command == "point") {
+        cout << "Command \"point\" is used to add, read or delete Points. " << endl;
+        cout << "Syntax: " << endl;
+        cout << "Add new Point: \t\tpoint add {point_name} {x(integer)} {y(integer)}" << endl;
+        cout << "Read a Point: \t\tpoint read {point_name}" << endl;
+        cout << "Delete a Point: \tpoint del {point_name}" << endl;
+    } else if(command == "line") {
+        cout << "Command \"line\" is used to add, read or delete Lines. " << endl;
+        cout << "Syntax: " << endl;
+        cout << "Add new Line: \t\tline add {line_name} {define_mode} {args}" << endl;
+        cout << "\tDefine Modes: 2p(Use 2 Points), 2v(in Mx + B Format), 3v(in Ax + By = C Format)" << endl;
+        cout << "\tArgs: Name of 2 Points(2p Mode), M and B(2v Mode), or A, B and C(3v Mode)" << endl;
+        cout << "Read a Line: \t\tline read {line_name}" << endl;
+        cout << "Delete a Line: \t\tline del {line_name}" << endl;
+    }
 }
 
 int main(){
@@ -289,7 +312,7 @@ int main(){
         } else if(command == "debug") {
             continue; //Breakpoint
         } else if(command == "help") {
-            cout << helpDoc << endl;
+            printDoc(cmd.inputs[1]);
         } else if(command == "point") {
             if (cmd.inputs[1] == "read") {
                 if (pList.getIndex(cmd.inputs[2]) == -1) ObjectNotFound();
@@ -299,7 +322,7 @@ int main(){
                 if (SAble2I(cmd.inputs[3]) && SAble2I(cmd.inputs[4])) {
                     buffer = Point(stoi(cmd.inputs[3]), stoi(cmd.inputs[4]));
                 } else {
-                    syntaxError();
+                    syntaxError(command);
                     continue;
                 }
                 if(pList.add(cmd.inputs[2], buffer)) cmdSuccess();
@@ -307,7 +330,7 @@ int main(){
             } else if (cmd.inputs[1] == "del") {
                 if(pList.del(cmd.inputs[2])) cmdSuccess();
                 else ObjectNotFound();
-            } else syntaxError();
+            } else syntaxError(command);
         } else if(command == "line") {
             if (cmd.inputs[1] == "read") {
                 if (lList.getIndex(cmd.inputs[2]) == -1) ObjectNotFound();
@@ -322,7 +345,7 @@ int main(){
                 } else if (lineMod == "3v" && SAble2I(cmd.inputs[4]) && SAble2I(cmd.inputs[5]) && SAble2I(cmd.inputs[6])) {
                     buffer = Line(stoi(cmd.inputs[4]), stoi(cmd.inputs[5]), stoi(cmd.inputs[6]));
                 } else {
-                    syntaxError();
+                    syntaxError(command);
                     continue;
                 }
                 if(lList.add(cmd.inputs[2], buffer)) cmdSuccess();
@@ -330,7 +353,7 @@ int main(){
             } else if (cmd.inputs[1] == "del") {
                 if(lList.del(cmd.inputs[2])) cmdSuccess();
                 else ObjectNotFound();
-            } else syntaxError();
+            } else syntaxError(command);
         } else UnknownCommand();
     }
 }
