@@ -261,11 +261,11 @@ bool SAble2I(string s) {
     return able;
 }
 
-void UnknownCommand() {
-    cout << "Unknown command, use command \"help\" to get help. " << endl;
+void UnknownCommand(string command) {
+    cout << "Unknown command \"" << command << "\", use command \"help\" to get help. " << endl;
 }
-void ObjectNotFound() {
-    cout << "Object Not Found. " << endl;
+void ObjectNotFound(string objectName) {
+    cout << "Object \"" << objectName << "\" Not Found. " << endl;
 }
 void cmdSuccess() {
     cout << "Successed. " << endl;
@@ -308,8 +308,10 @@ void printDoc(string command) {
         cout << "X/Y Intercept: \t\tcalc {xint/yint} {line_name}" << endl;
         cout << "Slope: \t\t\tclac slop {line_name}" << endl;
         cout << "POIntersect: \t\tcalc intc {line_name} {line_name}" << endl;
+    } else if(command == "exit") {
+        cout << "Command \"eixt\" is used to Exit the Program. " << endl;
     } else {
-        UnknownCommand();
+        UnknownCommand(command);
     }
 }
 
@@ -326,7 +328,7 @@ int main(){
             printDoc(cmd.inputs[1]);
         } else if(command == "point") {
             if (cmd.inputs[1] == "read") {
-                if (pList.getIndex(cmd.inputs[2]) == -1) ObjectNotFound();
+                if (pList.getIndex(cmd.inputs[2]) == -1) ObjectNotFound(cmd.inputs[2]);
                 else cout << pList.get(cmd.inputs[2]).describe() << endl;
             } else if (cmd.inputs[1] == "add") {
                 Point buffer;
@@ -340,11 +342,11 @@ int main(){
                 else addError();
             } else if (cmd.inputs[1] == "del") {
                 if(pList.del(cmd.inputs[2])) cmdSuccess();
-                else ObjectNotFound();
+                else ObjectNotFound(cmd.inputs[2]);
             } else syntaxError(command);
         } else if(command == "line") {
             if (cmd.inputs[1] == "read") {
-                if (lList.getIndex(cmd.inputs[2]) == -1) ObjectNotFound();
+                if (lList.getIndex(cmd.inputs[2]) == -1) ObjectNotFound(cmd.inputs[2]);
                 else cout << lList.get(cmd.inputs[2]).describe() << endl;
             } else if (cmd.inputs[1] == "add") {
                 string lineMod = cmd.inputs[3];
@@ -363,8 +365,8 @@ int main(){
                 else addError();
             } else if (cmd.inputs[1] == "del") {
                 if(lList.del(cmd.inputs[2])) cmdSuccess();
-                else ObjectNotFound();
+                else ObjectNotFound(cmd.inputs[2]);
             } else syntaxError(command);
-        } else UnknownCommand();
+        } else UnknownCommand(command);
     }
 }
