@@ -399,6 +399,13 @@ int main(){
                 if (lList.getIndex(cmd.inputs[2]) != -1) cout << "Y-Intercept: " << lList.get(cmd.inputs[2]).yInt() << endl;
             } else if (cmd.inputs[1] == "slop") {
                 if (lList.getIndex(cmd.inputs[2]) != -1) cout << "Slope: " << lList.get(cmd.inputs[2]).slope() << endl;
+            } else if (cmd.inputs[1] == "intc") {
+                if (lList.getIndex(cmd.inputs[2]) != -1 && lList.getIndex(cmd.inputs[3]) != -1) {
+                    cout << lList.get(cmd.inputs[2]).intersect(lList.get(cmd.inputs[3])).describe() << endl;
+                } else {
+                    if (lList.getIndex(cmd.inputs[2]) == -1) ObjectNotFound(cmd.inputs[2]);
+                    if (lList.getIndex(cmd.inputs[3]) == -1) ObjectNotFound(cmd.inputs[3]);
+                }
             }
         } else UnknownCommand(command);
     }
