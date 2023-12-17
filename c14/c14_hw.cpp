@@ -242,6 +242,18 @@ class CommandLine{
     }
 };
 
+bool SAble2I(string s) {
+    string allInt = "0123456789";
+    bool able = true;
+    for (int i = 0; i < s.length(); i++) {
+        if (allInt.find(s[i]) == -1) {
+            able = false;
+            break;
+        }
+    }
+    return able;
+}
+
 void UnknownCommand() {
     cout << "Unknown command, use command \"help\" to get help. " << endl;
 }
@@ -261,7 +273,7 @@ void syntaxError() {
 int main(){
     PointList pList(Point(0, 0));
     LineList lList(Line(0, 0, 0));
-    for(CommandLine cmd("Welcome! ", "# ", 6, ' '); cmd.inputs[0] != "exit"; cmd.getInput()) {
+    for(CommandLine cmd("Welcome! ", "# ", 7, ' '); cmd.inputs[0] != "exit"; cmd.getInput()) {
         string command = cmd.inputs[0];
         if(command == "") {
             continue;
@@ -272,7 +284,13 @@ int main(){
                 if (pList.getIndex(cmd.inputs[2]) == -1) ObjectNotFound();
                 else cout << pList.get(cmd.inputs[2]).describe() << endl;
             } else if (cmd.inputs[1] == "add") {
-                Point buffer(stoi(cmd.inputs[3]), stoi(cmd.inputs[4]));
+                Point buffer;
+                if (SAble2I(cmd.inputs[3]) && SAble2I(cmd.inputs[4])) {
+                    buffer = Point(stoi(cmd.inputs[3]), stoi(cmd.inputs[4]));
+                } else {
+                    syntaxError();
+                    continue;
+                }
                 if(pList.add(cmd.inputs[2], buffer)) cmdSuccess();
                 else addError();
             } else if (cmd.inputs[1] == "del") {
@@ -283,10 +301,21 @@ int main(){
             if (cmd.inputs[1] == "read") {
                 if (lList.getIndex(cmd.inputs[2]) == -1) ObjectNotFound();
                 else cout << lList.get(cmd.inputs[2]).describe() << endl;
-//            } else if (cmd.inputs[1] == "add") {
-//                Point buffer(stoi(cmd.inputs[3]), stoi(cmd.inputs[4]));
-//                if(pList.add(cmd.inputs[2], buffer)) cmdSuccess();
-//                else addError();
+            } else if (cmd.inputs[1] == "add") {
+                string lineMod = cmd.inputs[3];
+                Line buffer;
+                if (lineMod == "2p") {
+                    buffer = Line(pList.get(cmd.inputs[4]), pList.get(cmd.inputs[5]));
+                } else if (lineMod == "2v") {
+                    buffer = Line(stoi(cmd.inputs[4]), stoi(cmd.inputs[5]));
+                } else if (lineMod == "3v") {
+                    buffer = Line(stoi(cmd.inputs[4]), stoi(cmd.inputs[5]), stoi(cmd.inputs[6]));
+                } else {
+                    syntaxError();
+                    continue;
+                }
+                if(lList.add(cmd.inputs[2], buffer)) cmdSuccess();
+                else addError();
             } else if (cmd.inputs[1] == "del") {
                 if(lList.del(cmd.inputs[2])) cmdSuccess();
                 else ObjectNotFound();
