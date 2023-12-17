@@ -75,8 +75,8 @@ class Line{
     }
 
     //Functions - Slope
-    int slope() {
-        int rise = 0 - yInt(), run = xInt();
+    double slope() {
+        double rise = 0 - yInt(), run = xInt();
         return rise/run;
     }
 
@@ -397,6 +397,8 @@ int main(){
                 if (lList.getIndex(cmd.inputs[2]) != -1) cout << "X-Intercept: " << lList.get(cmd.inputs[2]).xInt() << endl;
             } else if (cmd.inputs[1] == "yint") {
                 if (lList.getIndex(cmd.inputs[2]) != -1) cout << "Y-Intercept: " << lList.get(cmd.inputs[2]).yInt() << endl;
+            } else if (cmd.inputs[1] == "slop") {
+                if (lList.getIndex(cmd.inputs[2]) != -1) cout << "Slope: " << lList.get(cmd.inputs[2]).slope() << endl;
             }
         } else UnknownCommand(command);
     }
