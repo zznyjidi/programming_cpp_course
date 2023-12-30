@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 using namespace std;
 
 int GCD3(int numA, int numB, int numC) {
@@ -239,9 +240,9 @@ class CommandLine{
     int maxInput;
     public:
     string inputs[32];
-    CommandLine(string startWith, string input,int initMaxInput, char seperateBy) {
+    CommandLine(string startWith, string inputSign, int initMaxInput, char seperateBy) {
         cout << startWith << endl;
-        inputStart = input;
+        inputStart = inputSign;
         maxInput = initMaxInput;
         cmdSeperator = seperateBy;
         initInputArr();
