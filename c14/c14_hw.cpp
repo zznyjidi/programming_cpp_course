@@ -332,7 +332,7 @@ void printDoc(string command) {
         cout << "Slope: \t\t\tclac slop {line_name}" << endl;
         cout << "POIntersect: \t\tcalc intc {line_name} {line_name}" << endl;
     } else if(command == "exit") {
-        cout << "Command \"eixt\" is used to Exit the Program. " << endl;
+        cout << "Command \"exit\" is used to Exit the Program. " << endl;
     } else {
         UnknownCommand(command);
     }
